@@ -21,6 +21,8 @@ public class Arr3 {
             }
             System.out.println();
         }
+        // 배열안에 홀수의 값들의 합과 평균을 구하시오
+
 
     }
 
