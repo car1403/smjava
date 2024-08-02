@@ -12,27 +12,33 @@ public class Control2 {
         System.out.printf("Num1 %d, Num2 %d, Num3 %d\n",a,b,c);
 
         // 최대 값과 최소 값을 출력 하시오
-        int max = 0;
-        int min = 0;
+//        int max = 0;
+//        int min = 0;
+//
+//        if(a < b){
+//            max = b;
+//        }else{
+//            max = a;
+//        }
+//        if(max < c){
+//            max = c;
+//        }
+//
+//
+//        if(a < b){
+//            min = a;
+//        }else{
+//            min = b;
+//        }
+//        if(min > c){
+//            min = c;
+//        }
 
-        if(a < b){
-            max = b;
-        }else{
-            max = a;
-        }
-        if(max < c){
-            max = c;
-        }
+        int max = (a > b)? a:b;
+        max = (max > c)? max:c;
 
-
-        if(a < b){
-            min = a;
-        }else{
-            min = b;
-        }
-        if(min > c){
-            min = c;
-        }
+        int min = (a < b)? a:b;
+        min = (min > c)? c:min;
 
         System.out.printf("Max %d, Min %d",max, min);
 
