@@ -12,9 +12,21 @@ public class Hello {
         String s = "Hello";
         System.out.printf("%d는 숫자, %s는 문자",a,s);
 
-//        System.out.print("Hello World");
-//        System.out.print("Hello World");
-//        System.out.print("Hello World");
+        int _b = 10;
+        int $b = 10;
+
+        int sumData = 0;
+
+        int data = 0;
+
+        int ab = 0;
 
     }
 }
+
+
+
+
+
+
+
