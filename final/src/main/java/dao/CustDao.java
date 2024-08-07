@@ -6,6 +6,7 @@ import vo.Cust;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,12 +14,42 @@ public class CustDao extends DbFrame {
 
     // 1. select
     public ArrayList<Cust> select(){
-        return null;
+        ArrayList<Cust> list = new ArrayList<>();
+
+        return list;
     }
 
     // 2. select one
-    public Cust select(String id) {
-        return null;
+    public Cust select(String id) throws SQLException {
+        Cust cust = null;
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(Sql.selectOneCust);
+            pstmt.setString(1,id);
+            //4. 전송
+            rset = pstmt.executeQuery();
+            rset.next();
+            String custId = rset.getString("id");
+            String custPwd = rset.getString("pwd");
+            String custName = rset.getString("name");
+            String custAcc = rset.getString("acc");
+            cust = new Cust(custId, custPwd, custName, custAcc);
+
+        } catch (SQLException e) {
+           throw e;
+        }finally {
+            close(rset);
+            close(pstmt);
+            close(con);
+        }
+
+
+        return cust;
     }
 
     // 3. insert
