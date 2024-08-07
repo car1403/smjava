@@ -22,7 +22,7 @@ public class CustDao extends DbFrame {
     }
 
     // 3. insert
-    public void insert(Cust cust){
+    public void insert(Cust cust) throws SQLException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -33,12 +33,10 @@ public class CustDao extends DbFrame {
             pstmt.setString(3,cust.getName());
             pstmt.setString(4,cust.getAcc());
 
-            //4. 전송
             pstmt.executeUpdate();
             System.out.println("Inserted Data .....");
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("SQL Error");
+            throw e;
         }finally {
             close(pstmt);
             close(con);
