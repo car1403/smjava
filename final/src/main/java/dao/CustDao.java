@@ -43,8 +43,22 @@ public class CustDao extends DbFrame {
         }
     }
     // 4. delete
-    public void delete(String id){
+    public void delete(String id) throws SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(Sql.deleteCust);
+            pstmt.setString(1,id);
 
+            pstmt.executeUpdate();
+            System.out.println("Updated Data .....");
+        } catch (SQLException e) {
+            throw e;
+        }finally {
+            close(pstmt);
+            close(con);
+        }
     }
     // 5. update
     public void update(Cust cust){
