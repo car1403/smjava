@@ -61,8 +61,26 @@ public class CustDao extends DbFrame {
         }
     }
     // 5. update
-    public void update(Cust cust){
+    public void update(Cust cust) throws SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(Sql.updateCust);
 
+            pstmt.setString(1,cust.getPwd());
+            pstmt.setString(2,cust.getName());
+            pstmt.setString(3,cust.getAcc());
+            pstmt.setString(4,cust.getId());
+
+            pstmt.executeUpdate();
+            System.out.println("Updated Data .....");
+        } catch (SQLException e) {
+            throw e;
+        }finally {
+            close(pstmt);
+            close(con);
+        }
     }
 }
 
