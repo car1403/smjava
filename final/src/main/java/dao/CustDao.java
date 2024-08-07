@@ -13,9 +13,35 @@ import java.util.ArrayList;
 public class CustDao extends DbFrame {
 
     // 1. select
-    public ArrayList<Cust> select(){
+    public ArrayList<Cust> select() throws SQLException {
         ArrayList<Cust> list = new ArrayList<>();
 
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(Sql.selectCust);
+            //4. 전송
+            rset = pstmt.executeQuery();
+            // 5. 결과 출력
+            while(rset.next()){
+                String custId = rset.getString("id");
+                String custPwd = rset.getString("pwd");
+                String custName = rset.getString("name");
+                String custAcc = rset.getString("acc");
+                Cust cust = new Cust(custId, custPwd, custName, custAcc);
+                list.add(cust);
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        }finally {
+            close(rset);
+            close(pstmt);
+            close(con);
+        }
         return list;
     }
 
